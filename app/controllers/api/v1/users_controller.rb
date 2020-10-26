@@ -9,7 +9,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    render json: UserSerializer.new(@user).serializable_hash, status: :ok
+    options = { include: [:products] }
+    render json: UserSerializer.new(@user, options).serializable_hash, status: :ok
   end
 
   def create

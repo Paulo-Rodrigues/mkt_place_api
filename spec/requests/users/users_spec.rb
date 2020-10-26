@@ -16,11 +16,13 @@ describe 'Users' do
   context '#show' do
     it 'show user' do
       user = create(:user)
+      user_product = create(:product, user: user)
 
       get "/api/v1/users/#{user.id}"
 
       expect(response).to have_http_status(200)
       expect(response.body).to include(user.email)
+      expect(response.body).to include(user_product.title)
     end
   end
 

@@ -21,6 +21,7 @@ describe 'Products' do
 
       expect(response).to have_http_status(:success)
       expect(response.body).to include(product.title)
+      expect(response.body).to include(product.user.email)
     end
   end
 
