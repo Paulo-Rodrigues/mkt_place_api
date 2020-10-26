@@ -26,7 +26,7 @@ describe 'Users' do
 
   context '#create' do
     it 'success' do
-      user_params = {user: { email: 'test@test.com', password: '123456' }}
+      user_params = { user: { email: 'test@test.com', password: '123456' } }
       post '/api/v1/users', params: user_params
 
       expect(User.count).to eq(1)
@@ -35,7 +35,7 @@ describe 'Users' do
 
     it 'failure' do
       another_user = create(:user)
-      user_params = {user: { email: another_user.email , password: '123456' }}
+      user_params = { user: { email: another_user.email, password: '123456' } }
       post '/api/v1/users', params: user_params
 
       expect(response).to have_http_status(:unprocessable_entity)

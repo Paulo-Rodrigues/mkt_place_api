@@ -44,7 +44,6 @@ describe 'Products' do
     end
 
     it 'forbidden' do
-      user = create(:user)
       params = { product: { title: '', price: '', published: true } }
       post '/api/v1/products', params: params
 

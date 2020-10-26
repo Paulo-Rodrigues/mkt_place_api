@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
 
     it 'valid user' do
       user = User.create!(email: 'test@test.com', password_digest: 'password')
-      
+
       expect(user.valid?).to be_truthy
     end
 
