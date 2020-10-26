@@ -46,16 +46,26 @@ describe 'Users' do
     it 'success' do
       user = create(:user)
       params = { user: { email: 'other@email.com' } }
-      patch "/api/v1/users/#{user.id}", params: params
+      headers = { Authorization: JsonWebToken.encode(user_id: user.id) }
+      patch "/api/v1/users/#{user.id}", params: params, headers: headers
 
       expect(response).to have_http_status(:success)
       expect(response.body).to include('other@email.com')
     end
 
+    it 'forbidden' do
+      user = create(:user)
+      params = { user: { email: 'other@email.com' } }
+      patch "/api/v1/users/#{user.id}", params: params
+
+      expect(response).to have_http_status(:forbidden)
+    end
+
     it 'failure' do
       user = create(:user)
       params = { user: { email: '' } }
-      patch "/api/v1/users/#{user.id}", params: params
+      headers = { Authorization: JsonWebToken.encode(user_id: user.id) }
+      patch "/api/v1/users/#{user.id}", params: params, headers: headers
 
       expect(response).to have_http_status(:unprocessable_entity)
     end
@@ -64,9 +74,17 @@ describe 'Users' do
   context '#destroy' do
     it 'success' do
       user = create(:user)
-      delete "/api/v1/users/#{user.id}"
+      headers = { Authorization: JsonWebToken.encode(user_id: user.id) }
+      delete "/api/v1/users/#{user.id}", headers: headers
 
       expect(response).to have_http_status(:no_content)
+    end
+
+    it 'forbidden' do
+      user = create(:user)
+      delete "/api/v1/users/#{user.id}"
+
+      expect(response).to have_http_status(:forbidden)
     end
   end
 end

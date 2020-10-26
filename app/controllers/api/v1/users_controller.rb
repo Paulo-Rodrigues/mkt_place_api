@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
+  before_action :check_owner, only: %i[update destroy]
 
   def index
     @users = User.all
@@ -35,6 +36,10 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
+
+  def check_owner
+    head :forbidden unless @user.id == current_user&.id
+  end
 
   def set_user
     @user = User.find(params[:id])
