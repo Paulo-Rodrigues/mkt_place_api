@@ -22,7 +22,7 @@ RSpec.describe Product, type: :model do
     it 'find a tv' do
       create(:product, title: 'TV 42', price: 80)
       create(:product, title: 'TV 42', price: 180)
-      search_terms =  { title: 'TV 42', min_price: 50, max_price: 100 }
+      search_terms = { title: 'TV 42', min_price: 50, max_price: 100 }
 
       expect(Product.search(search_terms).count).to eq(1)
     end

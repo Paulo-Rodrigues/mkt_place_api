@@ -22,3 +22,5 @@ Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 Rails/FilePath:
   Enabled: false
+Metrics/AbcSize:
+  Enabled: false
