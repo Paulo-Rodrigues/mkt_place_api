@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
 
   context 'associations' do
     it { is_expected.to have_many(:products).dependent(:destroy) }
+    it { is_expected.to have_many(:orders).dependent(:destroy) }
   end
 
   context 'validations' do
